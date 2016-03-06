@@ -19,6 +19,7 @@ package controllers;
 
 import Models.Card;
 import Models.Deck;
+import Models.Game;
 import Models.Player;
 import org.junit.Test;
 
@@ -103,6 +104,25 @@ public class ApiControllerDocTesterTest extends NinjaDocTester {
         assertEquals(myPlayer.getRoundMoneySplit(), 2);
         assertEquals(myPlayer.getRoundValue(), 6);
         assertEquals(myPlayer.getRoundValueSplit(), 6);
+    }
+    @Test
+    public void TestGame(){
+        Game g = new Game();
+        assertEquals(g.canNew, true);
+        assertEquals(g.canHit, false);
+        g.startnewRound();
+        assertEquals(g.canNew, false);
+        assertEquals(g.canHit,true);
+        g.rigSplit();
+        assertEquals(g.canSplit, true);
+        g.split();
+        assertEquals(g.canSplit, false);
+        assertEquals(g.hasSplit, true);
+        g.stay();
+        assertEquals(g.playing, false);
+        assertEquals(g.playingSplit, true);
+        g.staySplit();
+        assertEquals(g.playingSplit, false);
     }
 
 }

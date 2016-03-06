@@ -13,15 +13,40 @@ public class Player {
     private int roundValueSplit;
     private boolean hasAce;
     private boolean splitHasAce;
-    public boolean busted;
-    public boolean bustedSplit;
-    public boolean hasSplit;
 
     public Player(){
         money = 100;
         roundValue = 0;
-        busted = false;
-        hasSplit = false;
+        roundMoney = 0;
+        roundValueSplit = 0;
+        roundMoneySplit = 0;
+        hasAce = false;
+        splitHasAce = false;
+    }
+
+    public void reset(){
+        roundValue = 0;
+        roundMoney = 0;
+        roundValueSplit = 0;
+        roundMoneySplit = 0;
+        hasAce = false;
+        splitHasAce = false;
+    }
+
+    public void lost(){
+        roundMoney = 0;
+    }
+
+    public void lostSplit(){
+        roundMoneySplit = 0;
+    }
+
+    public void won(){
+        money += roundMoney*2;
+    }
+
+    public void wonSplit(){
+        money += roundMoneySplit*2;
     }
 
     public int getMoney(){
@@ -49,13 +74,15 @@ public class Player {
         money -= 2;
     }
 
+    public void doubleDown(){
+        roundMoney *= 2;
+    }
+
     public void split(Card SplitCard){
-        hasSplit = true;
         money -= 2;
         roundMoneySplit = 2;
         roundValue -= SplitCard.getValue();
         hitSplit(SplitCard);
-
     }
 
     public void hit(Card newCard){
@@ -88,7 +115,7 @@ public class Player {
             roundValueSplit += newCard.getValue();
         else
             roundValueSplit += 10;
-        if(hasAce && roundValueSplit > 21) {
+        if(splitHasAce && roundValueSplit > 21) {
             roundValueSplit -= 10;
             splitHasAce = false;
         }
