@@ -17,6 +17,8 @@
 package controllers;
 
 
+import Models.Card;
+import Models.Deck;
 import org.junit.Test;
 
 import ninja.NinjaDocTester;
@@ -24,7 +26,7 @@ import org.doctester.testbrowser.Request;
 import org.doctester.testbrowser.Response;
 import org.hamcrest.CoreMatchers;
 import static org.hamcrest.CoreMatchers.containsString;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
 
 public class ApiControllerDocTesterTest extends NinjaDocTester {
     
@@ -57,6 +59,32 @@ public class ApiControllerDocTesterTest extends NinjaDocTester {
         assertThat(simplePojo.content, CoreMatchers.equalTo("Hello World! Hello Json!"));
 
     
+    }
+    @Test
+    public void TestCard(){
+        Card mycard = new Card(5,"Hearts");
+        assertEquals(5, mycard.getValue());
+    }
+    @Test
+    public void TestDeck(){
+        Card mycard = new Card(1, "Hearts");
+        Deck mydeck = new Deck();
+        assertEquals(mycard.getValue(), mydeck.getCard(0).getValue());
+        assertEquals(mycard.getSuit(), mydeck.getCard(0).getSuit());
+
+        Card one = mydeck.Deal();
+        Card test;
+        for(int i = 0; i < 51; i++){
+            test = mydeck.Deal();
+            if(one.getValue() == test.getValue()) {
+                assertNotEquals(one.getSuit(), test.getSuit());
+            }
+        }
+        assertEquals(mydeck.getSize(), 0);
+        mydeck.resetDeck();
+        assertEquals(mydeck.getSize(), 52);
+        assertEquals(mycard.getValue(), mydeck.getCard(0).getValue());
+        assertEquals(mycard.getSuit(), mydeck.getCard(0).getSuit());
     }
 
 }
