@@ -4,14 +4,21 @@
 /* Add additional stylesheets below
 -------------------------------------------------- */
 
+table {
+padding-left:50px;
+padding-top:50px;
+}
+
+
 tr{
-width:500px;
+
 }
 
 td{
 width:100px;
-height:20px;
+height:140px;
 text-align:center;
+border:50px none;
 }
 
 .title{
@@ -23,22 +30,56 @@ width: 100px;
 background-color:#F0F0F0;
 }
 
+
+h1 {
+background-color:#0052CC;
+text-align:center;
+}
+
 #dealer{
 float:up;
-width: 500px;
+height:500px;
+background-color:#B3B3FF;
+border:3px solid #007ACC;
 }
+
 
 #player{
 float:left;
-width: 500px;
+background-color:99D6FF;
+width: 39%;
+height:500px;
+display:inline;
+border: 3px solid #007ACC;
 }
 
 #split{
 float:right;
-width: 500px;
+background-color:#99D6FF;
+width: 39%;
+height:500px;
+display:inline;
+border: 3px solid #007ACC;
 }
+
+/*for panel*/
+
+button {
+width:100px;
+height:50px;
+font-size:20px;
+}
+
 #panel{
 float:left;
-width: 300px;
+width: 10%;
 height: 500px;
+border:3px solid #007ACC;
+}
+
+#panelforSplit{
+float:right;
+width: 10%;
+height: 500px;
+border:3px solid #007ACC;
 }
