@@ -33,7 +33,7 @@ import static org.junit.Assert.*;
 public class ApiControllerDocTesterTest extends NinjaDocTester {
     
     String URL_INDEX = "/";
-    String URL_HELLO_WORLD_JSON = "/hello_world.json";
+    String URL_BLACKJACK = "/Blackjack";
     
     @Test
     public void testGetIndex() {
@@ -49,19 +49,17 @@ public class ApiControllerDocTesterTest extends NinjaDocTester {
     }
     
     @Test
-    public void testGetHelloWorldJson() {
+    public void testBlackjack() {
     
         Response response = makeRequest(
                 Request.GET().url(
-                        testServerUrl().path(URL_HELLO_WORLD_JSON)));
+                        testServerUrl().path(URL_BLACKJACK)));
 
-        ApplicationController.SimplePojo simplePojo 
-                = response.payloadJsonAs(ApplicationController.SimplePojo.class);
-        
-        assertThat(simplePojo.content, CoreMatchers.equalTo("Hello World! Hello Json!"));
+        assertThat(response.payload, containsString("Blackjack"));
 
     
     }
+
     @Test
     public void TestCard(){
         Card mycard = new Card(5,"Hearts");
