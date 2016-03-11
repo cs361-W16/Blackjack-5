@@ -30,6 +30,11 @@ public class ApplicationController {
         return Results.html();
 
     }
+
+    public Result blackJack(){
+
+        return Results.html().template("views/Blackjack/Blackjack.flt.html");
+    }
     
     public Result helloWorldJson() {
         
