@@ -26,7 +26,7 @@ public class Game {
     public Game(){
         player1 = new Player();
         myDeck = new Deck();
-        hands = new ArrayList<>();
+        hands = new ArrayList<ArrayList<Card>>();
         hands.add(new ArrayList<Card>());   //Dealer
         hands.add(new ArrayList<Card>());   //Player
         hands.add(new ArrayList<Card>());   //Player Split
@@ -101,6 +101,8 @@ public class Game {
         if(player1.getRoundValue() == 21){
             playing = false;
             player1.won();
+            canHit = false;
+            canStay = false;
         }
         else if(player1.getRoundValue() < 21){
             canHit = true;
@@ -108,18 +110,18 @@ public class Game {
         }
         else{
             playing = false;
-            player1.lost();
         }
         if(hasSplit) {
             if (player1.getRoundValueSplit() == 21) {
                 playingSplit = false;
                 player1.wonSplit();
+                canHitSplit = false;
+                canStaySplit = false;
             } else if (player1.getRoundValueSplit() < 21) {
                 canHitSplit = true;
                 canStaySplit = true;
             } else {
                 playingSplit = false;
-                player1.lostSplit();
             }
         }
         if(!playing && !playingSplit){  //Prompts the user only the ability to start a new round
@@ -154,6 +156,7 @@ public class Game {
         Card currentCard = myDeck.Deal();
         hands.get(1).add(currentCard);
         player1.hit(currentCard);
+        playing = false;
         roundCheck();
     }
     public void stay(){
@@ -164,7 +167,7 @@ public class Game {
                 player1.won();
 
             } else if (dealertotal == 21 || dealertotal > player1.getRoundValue()) {
-                player1.lost();
+                playing = false;
             }
             else{
                 player1.won();
@@ -182,13 +185,13 @@ public class Game {
         }
     }
     public void staySplit(){
-            while (dealertotal < 17 && (dealertotal < player1.getRoundValueSplit())) {
+            while (dealertotal < 17 || (dealertotal < player1.getRoundValueSplit())) {
                 updateDealerTotal(myDeck.Deal());
             }
             if (dealertotal > 21) {
                 player1.wonSplit();
             } else if (dealertotal == 21 || dealertotal > player1.getRoundValueSplit()) {
-                player1.lostSplit();
+                playingSplit = false;
             }
             else{
                 player1.wonSplit();

@@ -33,14 +33,6 @@ public class Player {
         splitHasAce = false;
     }
 
-    public void lost(){
-        roundMoney = 0;
-    }
-
-    public void lostSplit(){
-        roundMoneySplit = 0;
-    }
-
     public void won(){
         money += roundMoney*2;
     }
@@ -75,6 +67,7 @@ public class Player {
     }
 
     public void doubleDown(){
+        money -= roundMoney;
         roundMoney *= 2;
     }
 
