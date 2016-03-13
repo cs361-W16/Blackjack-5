@@ -6,9 +6,9 @@ import java.util.ArrayList;
  * Created by Natha_000 on 3/5/2016.
  */
 public class Game {
-    private Player player1 = new Player();
-    private Deck myDeck = new Deck();
-    public ArrayList<ArrayList<Card>> hands = new ArrayList<>();
+    private Player player1;
+    private Deck myDeck;
+    public ArrayList<ArrayList<Card>> hands;
     private int dealertotal;
     public boolean hasSplit;
     public boolean canNew;  //If the player game start a new hand
@@ -24,6 +24,9 @@ public class Game {
 
 
     public Game(){
+        player1 = new Player();
+        myDeck = new Deck();
+        hands = new ArrayList<>();
         hands.add(new ArrayList<Card>());   //Dealer
         hands.add(new ArrayList<Card>());   //Player
         hands.add(new ArrayList<Card>());   //Player Split
