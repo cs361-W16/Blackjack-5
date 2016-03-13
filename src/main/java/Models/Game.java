@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Created by Natha_000 on 3/5/2016.
  */
 public class Game {
-    private Player player1;
+    public Player player1;
     private Deck myDeck;
     public ArrayList<ArrayList<Card>> hands;
     private int dealertotal;
@@ -84,6 +84,16 @@ public class Game {
         if(hands.get(1).get(0).getValue() == hands.get(1).get(1).getValue()){
             canSplit = true;
         }
+    }
+    public void rigWinBoth(){
+        player1.reset();
+        hands.get(1).add(new Card(10, "Spades"));
+        player1.hit(new Card(10, "Spades"));
+        hands.get(1).add(new Card(10, "Hearts"));
+        player1.hit(new Card(10, "Hearts"));
+        player1.split(new Card(10, "Hearts"));
+        player1.hit(new Card(1, "Diamond"));
+        player1.hitSplit(new Card(1, "Spades"));
     }
     public void rigSplit(){         //Strictly for testing
         hands.get(1).clear();

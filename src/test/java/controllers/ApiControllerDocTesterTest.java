@@ -90,6 +90,10 @@ public class ApiControllerDocTesterTest extends NinjaDocTester {
     public void TestPlayer(){
         Player myPlayer = new Player();
         assertEquals(myPlayer.getMoney(), 100);
+        assertEquals(myPlayer.getRoundValue(), 0);
+        assertEquals(myPlayer.getRoundMoney(), 0);
+        assertEquals(myPlayer.getRoundMoneySplit(), 0);
+        assertEquals(myPlayer.getRoundValueSplit(), 0);
         myPlayer.makeInitialBet();
         assertEquals(myPlayer.getMoney(), 98);
         assertEquals(myPlayer.getRoundMoney(), 2);
@@ -115,6 +119,14 @@ public class ApiControllerDocTesterTest extends NinjaDocTester {
         myPlayer.wonSplit();
         myPlayer.reset();
         assertEquals(myPlayer.getMoney(), 100); //Player did not win their other hand (gained 2, and lost 2)
+        myPlayer.reset();
+        myPlayer.makeInitialBet();
+        myPlayer.hit(new Card(2, "Hearts"));
+        myPlayer.hit(new Card(4, "Spades"));
+        myPlayer.doubleDown();
+        assertEquals(myPlayer.getMoney(), 96);
+        myPlayer.won();
+        assertEquals(myPlayer.getMoney(), 104);
 
 
     }
@@ -144,6 +156,15 @@ public class ApiControllerDocTesterTest extends NinjaDocTester {
         g.startnewRound();
         g.doubleDown();
         assertEquals(g.hands.get(1).size(), 3);
+        g.startnewRound();
+        g.rigWinBoth();
+        assertEquals(g.player1.getRoundValue(), 21);
+        assertEquals(g.player1.getRoundValueSplit(), 21);
+        g.roundCheck();
+        assertEquals(g.playing, false);
+        assertEquals(g.playingSplit, false);
+        assertEquals(g.canHitSplit, false);
+        assertEquals(g.canStaySplit, false);
 
     }
 
