@@ -17,6 +17,10 @@
 package controllers;
 
 
+import Models.Card;
+import Models.Deck;
+import Models.Game;
+import Models.Player;
 import org.junit.Test;
 
 import ninja.NinjaDocTester;
@@ -24,12 +28,12 @@ import org.doctester.testbrowser.Request;
 import org.doctester.testbrowser.Response;
 import org.hamcrest.CoreMatchers;
 import static org.hamcrest.CoreMatchers.containsString;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
 
 public class ApiControllerDocTesterTest extends NinjaDocTester {
     
     String URL_INDEX = "/";
-    String URL_HELLO_WORLD_JSON = "/hello_world.json";
+    String URL_BLACKJACK = "/Blackjack";
     
     @Test
     public void testGetIndex() {
@@ -45,18 +49,78 @@ public class ApiControllerDocTesterTest extends NinjaDocTester {
     }
     
     @Test
-    public void testGetHelloWorldJson() {
+    public void testBlackjack() {
     
         Response response = makeRequest(
                 Request.GET().url(
-                        testServerUrl().path(URL_HELLO_WORLD_JSON)));
+                        testServerUrl().path(URL_BLACKJACK)));
 
-        ApplicationController.SimplePojo simplePojo 
-                = response.payloadJsonAs(ApplicationController.SimplePojo.class);
-        
-        assertThat(simplePojo.content, CoreMatchers.equalTo("Hello World! Hello Json!"));
+        assertThat(response.payload, containsString("Blackjack"));
 
     
+    }
+
+    @Test
+    public void TestCard(){
+        Card mycard = new Card(5,"Hearts");
+        assertEquals(5, mycard.getValue());
+    }
+    @Test
+    public void TestDeck(){
+        Card mycard = new Card(1, "Hearts");
+        Deck mydeck = new Deck();
+        assertEquals(mycard.getValue(), mydeck.getCard(0).getValue());
+        assertEquals(mycard.getSuit(), mydeck.getCard(0).getSuit());
+
+        Card one = mydeck.Deal();
+        Card test;
+        for(int i = 0; i < 51; i++){
+            test = mydeck.Deal();
+            if(one.getValue() == test.getValue()) {
+                assertNotEquals(one.getSuit(), test.getSuit());
+            }
+        }
+        assertEquals(mydeck.getSize(), 0);
+        mydeck.resetDeck();
+        assertEquals(mydeck.getSize(), 52);
+        assertEquals(mycard.getValue(), mydeck.getCard(0).getValue());
+        assertEquals(mycard.getSuit(), mydeck.getCard(0).getSuit());
+    }
+    @Test
+    public void TestPlayer(){
+        Player myPlayer = new Player();
+        assertEquals(myPlayer.getMoney(), 100);
+        myPlayer.makeInitialBet();
+        assertEquals(myPlayer.getMoney(), 98);
+        assertEquals(myPlayer.getRoundMoney(), 2);
+        myPlayer.hit(new Card(6, "Diamonds"));
+        myPlayer.hit(new Card(6, "Spades"));
+        assertEquals(myPlayer.getRoundValue(), 12);
+
+        myPlayer.split(new Card(6, "Spades"));
+        assertEquals(myPlayer.getRoundMoney(), 2);
+        assertEquals(myPlayer.getRoundMoneySplit(), 2);
+        assertEquals(myPlayer.getRoundValue(), 6);
+        assertEquals(myPlayer.getRoundValueSplit(), 6);
+    }
+    @Test
+    public void TestGame(){
+        Game g = new Game();
+        assertEquals(g.canNew, true);
+        assertEquals(g.canHit, false);
+        g.startnewRound();
+        assertEquals(g.canNew, false);
+        assertEquals(g.canHit,true);
+        g.rigSplit();
+        assertEquals(g.canSplit, true);
+        g.split();
+        assertEquals(g.canSplit, false);
+        assertEquals(g.hasSplit, true);
+        g.stay();
+        assertEquals(g.playing, false);
+        assertEquals(g.playingSplit, true);
+        g.staySplit();
+        assertEquals(g.playingSplit, false);
     }
 
 }
