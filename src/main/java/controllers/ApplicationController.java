@@ -16,6 +16,7 @@
 
 package controllers;
 
+import Models.Game;
 import ninja.Result;
 import ninja.Results;
 
@@ -24,6 +25,8 @@ import com.google.inject.Singleton;
 
 @Singleton
 public class ApplicationController {
+
+    Game g;
 
     public Result index() {
 
@@ -44,7 +47,55 @@ public class ApplicationController {
         return Results.json().render(simplePojo);
 
     }
-    
+
+
+    public Result gameGet(){
+        g = new Game();
+
+        return Results.json().render(g);
+    }
+    public Result gameNew(){
+        g.startnewRound();
+
+        return Results.json().render(g);
+    }
+
+    public Result gameHit(){
+        g.hit();
+
+        return Results.json().render(g);
+    }
+
+    public Result gameHitSplit(){
+        g.hitSplit();
+
+        return Results.json().render(g);
+    }
+
+    public Result gameDoubleDown(){
+        g.doubleDown();
+
+        return Results.json().render(g);
+    }
+
+    public Result gameStay(){
+        g.stay();
+
+        return Results.json().render(g);
+    }
+
+    public Result gameStaySplit(){
+        g.staySplit();
+
+        return Results.json().render(g);
+    }
+
+    public Result gameSplit(){
+        g.split();
+
+        return Results.json().render(g);
+    }
+
     public static class SimplePojo {
 
         public String content;
