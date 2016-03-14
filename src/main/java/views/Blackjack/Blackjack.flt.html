@@ -71,13 +71,11 @@
     function display(game){
         console.log(game);
 
-
-
     }
 
 
 
-    $.getJSON("http://localhost:8080/Blackjack", function( data ) {
+    $.getJSON("http://localhost:8080/game", function( data ) {
         display(data);
         game = data;
     });
