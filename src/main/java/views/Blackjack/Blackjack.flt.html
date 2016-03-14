@@ -58,10 +58,8 @@
 </div>
 
 <div id = "pSplit">
-    <button id = "SDeal" style="padding-top:25px">Deal</button>
     <button id = "SHit" style="padding-top:25px">Hit</button>
     <button id = "SStay" style="padding-top:25px">Stay</button>
-    <button id="SsplitButton" style="padding-top:25px">Split</button>
     <button id="SDouble" style="padding-top:25px">Double</button>
 </div>
 
@@ -76,6 +74,118 @@
 
 
     }
+
+
+
+    $.getJSON("http://localhost:8080/Blackjack", function( data ) {
+        display(data);
+        game = data;
+    });
+
+    $("#Deal").click(function(){
+           $.ajax({
+            type: "POST",
+            url: "/newRound",
+            data: JSON.stringify(game),
+            success: function(data, status){console.log("Data: " + data + "\nStatus: " + status);
+                game = data;
+                display(data);},
+            contentType:"application/json; charset=utf-8",
+            dataType:"json",
+        });
+
+    });
+
+    $("#Hit").click(function(){
+        $.ajax({
+            type: "POST",
+            url: "/hit",
+            data: JSON.stringify(game),
+            success: function(data, status){console.log("Data: " + data + "\nStatus: " + status);
+                game = data;
+                display(data);},
+            contentType:"application/json; charset=utf-8",
+            dataType:"json",
+        });
+    });
+
+    $("#SHit").click(function(){
+        $.ajax({
+            type: "POST",
+            url: "/hitSplit",
+            data: JSON.stringify(game),
+            success: function(data, status){console.log("Data: " + data + "\nStatus: " + status);
+                game = data;
+                display(data);},
+            contentType:"application/json; charset=utf-8",
+            dataType:"json",
+        });
+    });
+
+    $("#Stay").click(function(){
+        $.ajax({
+            type: "POST",
+            url: "/stay",
+            data: JSON.stringify(game),
+            success: function(data, status){console.log("Data: " + data + "\nStatus: " + status);
+                game = data;
+                display(data);},
+            contentType:"application/json; charset=utf-8",
+            dataType:"json",
+        });
+    });
+
+    $("#SStay").click(function(){
+        $.ajax({
+            type: "POST",
+            url: "/staySplit",
+            data: JSON.stringify(game),
+            success: function(data, status){console.log("Data: " + data + "\nStatus: " + status);
+                game = data;
+                display(data);},
+            contentType:"application/json; charset=utf-8",
+            dataType:"json",
+        });
+    });
+
+    $("#Double").click(function(){
+        $.ajax({
+            type: "POST",
+            url: "/doubleDown",
+            data: JSON.stringify(game),
+            success: function(data, status){console.log("Data: " + data + "\nStatus: " + status);
+                game = data;
+                display(data);},
+            contentType:"application/json; charset=utf-8",
+            dataType:"json",
+        });
+    });
+
+    $("#SDouble").click(function(){
+        $.ajax({
+            type: "POST",
+            url: "/doubleDown",
+            data: JSON.stringify(game),
+            success: function(data, status){console.log("Data: " + data + "\nStatus: " + status);
+                game = data;
+                display(data);},
+            contentType:"application/json; charset=utf-8",
+            dataType:"json",
+        });
+    });
+
+    $("#splitButton").click(function(){
+        $.ajax({
+            type: "POST",
+            url: "/split",
+            data: JSON.stringify(game),
+            success: function(data, status){console.log("Data: " + data + "\nStatus: " + status);
+                game = data;
+                display(data);},
+            contentType:"application/json; charset=utf-8",
+            dataType:"json",
+        });
+    });
 
 
 </script>
