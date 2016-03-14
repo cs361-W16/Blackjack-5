@@ -17,6 +17,7 @@
 package controllers;
 
 import Models.Game;
+import ninja.Context;
 import ninja.Result;
 import ninja.Results;
 
@@ -54,44 +55,51 @@ public class ApplicationController {
 
         return Results.json().render(g);
     }
-    public Result gameNew(){
-        g.startnewRound();
+    public Result gameNew(Context context, Game g){
+        if (context.getRequestPath().contains("newRound"))
+            g.startnewRound();
 
         return Results.json().render(g);
     }
 
-    public Result gameHit(){
-        g.hit();
+    public Result gameHit(Context context, Game g){
+        if (context.getRequestPath().contains("hit"))
+            g.hit();
 
         return Results.json().render(g);
     }
 
-    public Result gameHitSplit(){
-        g.hitSplit();
+    public Result gameHitSplit(Context context, Game g){
+        if (context.getRequestPath().contains("hitSplit"))
+            g.hitSplit();
 
         return Results.json().render(g);
     }
 
-    public Result gameDoubleDown(){
-        g.doubleDown();
+    public Result gameDoubleDown(Context context, Game g){
+        if (context.getRequestPath().contains("doubleDown"))
+            g.doubleDown();
 
         return Results.json().render(g);
     }
 
-    public Result gameStay(){
-        g.stay();
+    public Result gameStay(Context context, Game g){
+        if (context.getRequestPath().contains("stay"))
+            g.stay();
 
         return Results.json().render(g);
     }
 
-    public Result gameStaySplit(){
-        g.staySplit();
+    public Result gameStaySplit(Context context, Game g){
+        if (context.getRequestPath().contains("staySplit"))
+            g.staySplit();
 
         return Results.json().render(g);
     }
 
-    public Result gameSplit(){
-        g.split();
+    public Result gameSplit(Context context, Game g){
+        if (context.getRequestPath().contains("split"))
+            g.split();
 
         return Results.json().render(g);
     }
