@@ -28,7 +28,9 @@
     <tr><td class = "cardLocation l0"></td>
     </tr>
     </table>
-
+    <div id="playerMoney">
+        <p id="pMoney"></p>
+    </div>
 </div>
 <div id = "split">
     <p>Split</p>
@@ -50,11 +52,10 @@
 
 <script>
 
-    var game;
-
-    function display(game){
-        console.log(game);
-       $( '.columnOfCards' ).html("");
+var game;
+function display(game){
+  console.log(game);
+  $( '.columnOfCards' ).html("");
 
   $.each(game.hands[0], function( key, val ) {
       $( '#dealer .l0' ).append("<img src='/assets/cardImage/"+val.value+"_"+val.suit+".png' >");
@@ -67,9 +68,12 @@
    $.each(game.hands[2], function( key, val ) {
       $( '#split .l0' ).append("<img src='/assets/cardImage/"+val.value+"_"+val.suit+".png'>");
   });
-
-
-    }
+      var div = document.getElementById('playerMoney');
+      var text = document.getElementById('pMoney');
+      text.innerHTML = 'Money of player:'+game.player1.money;
+      div.appendChild(text);
+      document.body.appendChild(div);
+}
 
 
 
