@@ -73,6 +73,53 @@ function display(game){
       text.innerHTML = 'Money of player:'+game.player1.money;
       div.appendChild(text);
       document.body.appendChild(div);
+     if(game.canSplit != true){
+        document.getElementById('splitButton').style.visibility = 'hidden';
+    }
+    else{
+        document.getElementById('splitButton').style.visibility = 'visible';
+    }
+
+    if(game.canStay != true){
+        document.getElementById('Stay').style.visibility = 'hidden';
+    }
+    else{
+        document.getElementById('Stay').style.visibility = 'visible';
+    }
+    if(game.canHit != true){
+     document.getElementById('Hit').style.visibility = 'hidden';
+    }
+    else{
+     document.getElementById('Hit').style.visibility = 'visible';
+    }
+    if(game.canDoubleDown != true){
+        document.getElementById('Double').style.visibility = 'hidden';
+    }
+    else{
+        document.getElementById('Double').style.visibility = 'visible';
+    }
+    if(game.canNew != true){
+        document.getElementById('Deal').style.visibility = 'hidden';
+    }
+    else{
+        document.getElementById('Deal').style.visibility = 'visible';
+    }
+    if(game.canHitSplit != true){
+        document.getElementById('SHit').style.visibility = 'hidden';
+    }
+    else{
+        document.getElementById('SHit').style.visibility = 'visible';
+    }if(game.canStaySplit != true){
+        document.getElementById('SStay').style.visibility = 'hidden';
+    }
+    else{
+        document.getElementById('SStay').style.visibility = 'visible';
+    }if(game.canDoubleDown != true){
+        document.getElementById('SDouble').style.visibility = 'hidden';
+    }
+    else{
+        document.getElementById('SDouble').style.visibility = 'visible';
+    }
 }
 
 
