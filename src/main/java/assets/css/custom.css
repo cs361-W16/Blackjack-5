@@ -9,9 +9,10 @@ padding-left:50px;
 padding-top:50px;
 }
 
-
-tr{
-
+p {
+text-align:center;
+font-size:1em;
+font-family:Verdana;
 }
 
 td{
@@ -34,6 +35,14 @@ background-color:#F0F0F0;
 h1 {
 background-color:#0052CC;
 text-align:center;
+}
+
+img {
+width:100px;
+height:140px;
+display:inline;
+position:relative;
+
 }
 
 #dealer{

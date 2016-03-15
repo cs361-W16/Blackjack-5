@@ -5,13 +5,9 @@
 
 <body>
 <div id = "dealer">
-    <table>
-        <tr><td class = "cardLocation 10"></td>
-            <td class = "cardLocation 12"></td>
-            <td class = "cardLocation 13"></td>
-            <td class = "cardLocation 14"></td>
-            <td class = "cardLocation 15"></td>
-            <td class = "cardLocation 16"></td>
+    <p>Dealer</p>
+    <table id="dealerTable">
+        <tr><td class = "cardLocation l0"></td>
 
         </tr>
     </table>
@@ -27,31 +23,19 @@
 </div>
 
 <div id = "player">
+    <p>Player</p>
     <table>
-    <tr><td class = "cardLocation 10"></td>
-        <td class = "cardLocation 12"></td>
-        <td class = "cardLocation 13"></td>
-    </tr>
-    <tr>
-        <td class = "cardLocation 14"></td>
-        <td class = "cardLocation 15"></td>
-        <td class = "cardLocation 16"></td>
-
+    <tr><td class = "cardLocation l0"></td>
     </tr>
     </table>
 
 </div>
 <div id = "split">
+    <p>Split</p>
     <table>
-        <tr><td class = "cardLocation 10"></td>
-            <td class = "cardLocation 12"></td>
-            <td class = "cardLocation 13"></td>
-        </tr>
-        <tr>
-            <td class = "cardLocation 14"></td>
-            <td class = "cardLocation 15"></td>
-            <td class = "cardLocation 16"></td>
+        <tr><td class = "cardLocation l0"></td>
 
+        </tr>
         </tr>
     </table>
 
@@ -70,6 +54,20 @@
 
     function display(game){
         console.log(game);
+       $( '.columnOfCards' ).html("");
+
+  $.each(game.hands[0], function( key, val ) {
+      $( '#dealer .l0' ).append("<img src='/assets/cardImage/"+val.value+"_"+val.suit+".png' >");
+  });
+
+  $.each(game.hands[1], function( key, val ) {
+      $( '#player .l0' ).append("<img src='/assets/cardImage/"+val.value+"_"+val.suit+".png'>");
+  });
+
+   $.each(game.hands[2], function( key, val ) {
+      $( '#split .l0' ).append("<img src='/assets/cardImage/"+val.value+"_"+val.suit+".png'>");
+  });
+
 
     }
 
